@@ -1,0 +1,158 @@
+﻿@model TJJ.Areas.Admin.DataViewModel.ManageUsersViewModel
+
+@{
+    ViewBag.Title = "جزئیات کاربر";
+    //Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.code_melli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.code_melli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.birthday_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.birthday_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.user_type)
+        </dt>
+
+        <dd>
+            @Data_Layer.Tjj_Convertors.Get_User_Type(Model.user_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.inviter_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.inviter_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneConfirmed)
+            @Html.ActionLink("تأیید", "Confirm_Phone", new { id = Model.ID }, new { @class = "btn btn-outline-success" })
+            @Html.ActionLink("ردکردن ", "Deny_Phone", new { id = Model.ID }, new { @class = "btn btn-outline-danger" })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailConfirmed)
+            @Html.ActionLink("تأیید", "Confirm_Email", new { id = Model.ID }, new { @class = "btn btn-outline-success" })
+            @Html.ActionLink("ردکردن", "Deny_Email", new { id = Model.ID }, new { @class = "btn btn-outline-danger" })
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailConfirmed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gold_charge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gold_charge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rial_charge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rial_charge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegisterDateTime)
+        </dt>
+
+        <dd>
+            @Data_Layer.Tjj_Convertors.Get_Date_and_Time(Model.RegisterDateTime)
+        </dd>
+
+
+        @if (Model.dest_Card_Number != null && Model.dest_Card_Number != "" && Model.dest_Account_Number != null && Model.dest_Account_Number != "")
+        {
+            <dt>
+                @Html.DisplayNameFor(model => model.confirm_Account_Bank)
+            </dt>
+            <dd>
+                <br />
+                @Html.DisplayFor(model => model.dest_Account_Number)
+            </dd>
+            <dd>
+                @Html.DisplayFor(model => model.dest_Card_Number)
+            </dd>
+            <dd>
+                @Html.DisplayFor(model => model.confirm_Account_Bank)
+            </dd>
+            @Html.ActionLink("تأیید اطلاعات بانکی", "pass_bank", new { id = Model.ID }, new { @class = "btn btn-outline-success" })
+            @Html.ActionLink("رد اطلاعات بانکی", "reject_bank", new { id = Model.ID }, new { @class = "btn btn-outline-danger" })
+        }
+
+    </dl>
+    <br /><br /><br />
+    @Html.ActionLink("ریست رمزعبور", "ResetPassword", new { id = Model.ID }, new { @class = "btn btn-warning btn--icon-text", @OnClick = "return confirm('آیا از انجام اینکار مطمئن هستید؟؟')" })
+    @Html.ActionLink("ارسال مجدد ایمیل تأیید", "SendMail", new { id = Model.ID }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("ارسال پیام", "SendTicket", "ManageTickets", new { userid = Model.ID, ticketid = 0 }, new { @class = "btn btn-info" })
+    <br />
+</div>
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

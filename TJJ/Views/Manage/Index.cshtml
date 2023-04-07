@@ -1,0 +1,164 @@
+﻿@model IdentitySample.Models.IndexViewModel
+@{
+    ViewBag.Title = "پروفایل حساب کاربری";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+
+}
+
+@{
+    IdentitySample.Models.ApplicationDbContext db = new IdentitySample.Models.ApplicationDbContext();
+    var userInfo = TJJ.GetUserInfo.GetLogedInUserInfo(User.Identity.Name, db);
+    db.Dispose();
+}
+
+@*<h2>@ViewBag.Title</h2>*@
+<div class="row">
+    <div class="col-md-8 rt_txt">
+
+        <h3 class="mrg_top">
+            نام: @userInfo.fname @userInfo.lname
+        </h3>
+
+        <h3 class="mrg_top">
+            کد ملی: @userInfo.code_melli
+        </h3>
+
+        <h3 class="mrg_top">
+            تاریخ تولد: @userInfo.birthday_date
+        </h3>
+
+        <h3 class="mrg_top">
+            شماره موبایل: @userInfo.PhoneNumber
+        </h3>
+
+        <h3 class="mrg_top">
+            نام کاربری: @userInfo.UserName
+        </h3>
+
+        <h3 class="mrg_top">
+            ایمیل: @userInfo.Email
+        </h3>
+        @if (userInfo.EmailConfirmed == false && userInfo.Email != "")
+        {
+            <h3 class="mrg_top" style="color:red;">
+                آدرس ایمیل تأیید نشده است
+            </h3>
+        }
+
+        <h3 class="mrg_top">
+            مقدار شارژ طلای خام حساب کاربری: @userInfo.gold_charge گرم
+        </h3>
+        <br /><br />
+        @if (userInfo.dest_Account_Number != null && userInfo.dest_Account_Number != "")
+        {
+            <h3 class="mrg_top">
+                شماره شبا: IR@(userInfo.dest_Account_Number)
+            </h3>
+        }
+
+        @if (userInfo.dest_Card_Number != null && userInfo.dest_Card_Number != "")
+        {
+            <h3 class="mrg_top">
+                شماره کارت: @userInfo.dest_Card_Number
+            </h3>
+        }
+
+        @if (userInfo.dest_Account_Number == "" || userInfo.dest_Card_Number == "")
+        {
+            <h3 class="mrg_top">
+                وضعیت تأیید اطلاعات حساب بانکی: اطلاعات وارد نشده
+            </h3>
+        }
+        else if (userInfo.confirm_Account_Bank)
+        {
+            <h3 class="mrg_top" style="color:green;">
+                وضعیت تأیید اطلاعات حساب بانکی: تأیید شده
+            </h3>
+        }
+        else
+        {
+            <h3 class="mrg_top" style="color:red;">
+                وضعیت تأیید اطلاعات حساب بانکی: تأیید نشده
+            </h3>
+        }
+
+        <p>&ensp;</p>
+        @Html.ActionLink("ویرایش اطلاعات فوق", "Edit_User_Info", new { }, new { @class = "btn btn-primary" })
+        <p>&ensp;</p>
+        <br />
+
+        <p>
+            @(Model.HasPassword ? Html.ActionLink("تغییر رمزعبور", "ChangePassword", new { }, htmlAttributes: new { @class = "btn btn-outline-warning" })
+                : Html.ActionLink("رمزعبور را وارد کنید", "SetPassword"))
+        </p>
+        <p>
+            شماره تلفن: @(Model.PhoneNumber ?? "وارد نشده") [
+            @if (Model.PhoneNumber != null)
+            {
+                @Html.ActionLink("تغییر شماره موبایل", "AddPhoneNumber", new { }, new { @class = "btn btn-primary" })
+                @: &nbsp;|&nbsp;
+                @Html.ActionLink("حذف شماره موبایل", "RemovePhoneNumber", new { }, new { @class = "btn btn-danger" })
+            }
+            else
+            {
+                @Html.ActionLink("افزودن شماره موبایل", "AddPhoneNumber", new { }, new { @class = "btn btn-outline-primary" })
+            }
+            ]
+        </p>
+
+        @*<p>
+                External Logins: @Model.Logins.Count
+                @Html.ActionLink("[Manage]", "ManageLogins")
+            </p>*@
+
+        @if (Model.TwoFactor)
+        {
+            using (Html.BeginForm("DisableTFA", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    ورود دو مرحله ای هم اکنون فعال می باشد
+                    <input type="submit" value="غیر فعال کردن" class="btn btn-outline-danger" />
+                </p>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("EnableTFA", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    ورود دومرحله ای هم اکنون غیر فعال می باشد
+                    <input type="submit" value="فعالسازی" class="btn btn-outline-success" />
+                </p>
+            }
+        }
+        @if (Model.BrowserRemembered)
+        {
+            using (Html.BeginForm("ForgetBrowser", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    یادآوری بخاطرسپاری ورود دومرحله ای فعال است
+                    <input type="submit" value="فراموش کردن" class="btn btn-outline-warning" />
+                </p>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("RememberBrowser", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <p>
+                    یادآوری بخاطرسپاری ورود دومرحله ای غیر فعال است
+                    <input type="submit" value="بخاطر سپاری" class="btn btn-outline-primary" />
+                </p>
+            }
+        }
+    </div>
+</div>
+
+@section user_info_active
+{
+    navigation__active
+}

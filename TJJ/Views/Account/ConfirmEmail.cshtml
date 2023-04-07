@@ -1,0 +1,50 @@
+﻿@model IdentitySample.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "تأیید آدرس ایمیل و تکمیل ثبت نام";
+    Layout = "~/Views/Shared/_account_layout.cshtml";
+}
+
+
+<span class="login100-form-title p-b-49 text-success">
+    ایمیل شما تأیید شد
+</span>
+
+<p class="text-sm-center text-success font-weight-bold">
+    @Model.fname @Model.lname عزیز؛ با تشکر از ثبت نام شما؛ فرآیند ثبت نام حساب شما با موفقیت کامل شد و آدرس ایمیل شما تأیید شد.
+</p>
+<br />
+<p class="text-lg-center text-black font-weight-bold">
+    اطلاعات شما به شرح ذیل می باشد:
+</p>
+<br />
+<p class="text-lg-center text-black">
+    نام کاربری جهت ورود به سامانه: @Model.UserName
+</p>
+<p class="text-lg-center text-black">
+    ایمیل ثبت شده شما در سامانه: @Model.Email
+</p>
+
+@if (Model.PhoneNumber != "" && Model.PhoneNumber != null)
+{
+    <p class="text-lg-center text-black">
+        شماره موبایل ثبت شده: @Model.PhoneNumber
+    </p>
+}
+
+<br />
+<p class="text-lg-center text-dark font-weight-bold">
+    لطفا اطلاعات فوق را یادداشت نموده، سپس جهت ورود به حساب کاربری، روی گزینه زیر کلیک کنید.
+</p>
+
+@*<div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+
+        </div>
+    </div>*@
+
+<br />
+<p class="text-center">
+    @Html.ActionLink("ورود به حساب کاربری", "Login", "Account", new { @class = "btn btn-success" })
+</p>

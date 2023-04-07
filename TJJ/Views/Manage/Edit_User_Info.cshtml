@@ -1,0 +1,101 @@
+﻿@model IdentitySample.Models.EditUserInfoViewModel
+
+@{
+    ViewBag.Title = "ویرایش اطلاعات حساب کاربری";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+
+}
+
+@{
+    IdentitySample.Models.ApplicationDbContext db = new IdentitySample.Models.ApplicationDbContext();
+    var userInfo = TJJ.GetUserInfo.GetLogedInUserInfo(User.Identity.Name, db);
+    db.Dispose();
+}
+
+@*<h2>@ViewBag.Title</h2>*@
+<div class="row">
+    <div class="col-md-8 rt_txt">
+
+        @using (Html.BeginForm("Edit_User_Info", "Manage", FormMethod.Post, new { @class = "login100-form validate-form", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <span class="login100-form-title p-b-49">
+                ویرایش اطلاعات شخصی
+            </span>
+
+            <br /><p>&ensp;</p>
+
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <br />
+
+            <div class="wrap-input100 m-b-23">
+                @Html.LabelFor(m => m.fname, new { @class = "label-input100" })
+                @Html.TextBoxFor(m => m.fname, new { @class = "input100", @placeholder = "نام خود را وارد کنید" })
+            </div>
+
+            <div class="wrap-input100 m-b-23">
+                @Html.LabelFor(m => m.lname, new { @class = "label-input100" })
+                @Html.TextBoxFor(m => m.lname, new { @class = "input100", @placeholder = "نام خانوادگی خود را واد کنید" })
+
+            </div>
+
+            <div class="wrap-input100 m-b-23">
+                @Html.LabelFor(m => m.code_melli, new { @class = "label-input100" })
+                @Html.TextBoxFor(m => m.code_melli, new { @class = "input100", @placeholder = "کد ملی خود را واد کنید" })
+            </div>
+
+            <div class="wrap-input100 m-b-23">
+                @Html.LabelFor(m => m.birthday_date, new { @class = "label-input100" })
+                @Html.TextBoxFor(m => m.birthday_date, new { @class = "input100", @placeholder = "تاریخ تولد خود را وارد کنید" })
+            </div>
+
+            <div class="wrap-input100 m-b-23">
+                @Html.LabelFor(m => m.Email, new { @class = "label-input100" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "input100", @placeholder = "ایمیل خود را وارد کنید" })
+            </div>
+
+            <div class="wrap-input100 m-b-23">
+                @Html.LabelFor(m => m.dest_Account_Number, new { @class = "label-input100" })
+                <div style="direction:ltr;">
+                    <label class="label-input100">IR</label>
+                    @Html.TextBoxFor(m => m.DestAccountNumber_1, new { @class = "input100 bank_number bank_s", @maxlength = "2" })
+                    @Html.TextBoxFor(m => m.DestAccountNumber_2, new { @class = "input100 bank_number", @maxlength = "4" })
+                    @Html.TextBoxFor(m => m.DestAccountNumber_3, new { @class = "input100 bank_number", @maxlength = "4" })
+                    @Html.TextBoxFor(m => m.DestAccountNumber_4, new { @class = "input100 bank_number", @maxlength = "4" })
+                    @Html.TextBoxFor(m => m.DestAccountNumber_5, new { @class = "input100 bank_number", @maxlength = "4" })
+                    @Html.TextBoxFor(m => m.DestAccountNumber_6, new { @class = "input100 bank_number", @maxlength = "4" })
+                    @Html.TextBoxFor(m => m.DestAccountNumber_7, new { @class = "input100 bank_number bank_s", @maxlength = "2" })
+                </div>
+            </div>
+            <br />
+            <div class="wrap-input100 m-b-23">
+                @Html.LabelFor(m => m.dest_Card_Number, new { @class = "label-input100" })
+                <div style="direction:ltr;">
+                    @Html.TextBoxFor(m => m.DestCardNumber_1, new { @class = "input100 bank_number", @maxlength = "4" })
+                    @Html.TextBoxFor(m => m.DestCardNumber_2, new { @class = "input100 bank_number", @maxlength = "4" })
+                    @Html.TextBoxFor(m => m.DestCardNumber_3, new { @class = "input100 bank_number", @maxlength = "4" })
+                    @Html.TextBoxFor(m => m.DestCardNumber_4, new { @class = "input100 bank_number", @maxlength = "4" })
+                </div>
+            </div>
+            <br />
+
+
+
+
+            <p>&ensp;</p>
+            <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <input type="submit" value="تأیید و اعمال تغییرات" class="btn btn-outline-success" />
+                </div>
+            </div>
+            <br />
+        }
+
+    </div>
+</div>
+
+@section user_info_active
+{
+    navigation__active
+}

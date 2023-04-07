@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "اتمام ثبت نام و تأیید ایمیل";
+    Layout = "~/Views/Shared/_account_layout.cshtml";
+}
+
+
+<span class="login100-form-title p-b-49 text-success">
+    تأیید ایمیل وارد شده
+</span>
+
+<p class="text-sm-center text-success">
+    @ViewBag.user_name عزیز؛ با تشکر از ثبت نام شما؛ فرآیند ثبت نام شما با موفقیت انجام شد.
+</p>
+<br />
+<p class="text-lg-center text-danger font-weight-bold">
+    جهت تأیید آدرس ایمیلی که وارد کردید و تکمیل ثبت نام شما، لینک تأیید آدرس ایمیل، از طرف سایت برای شما ارسال شده است، لطفا صندوق دریافتی و همچین پوشه اسپم ایمیل خود را بررسی فرمایید، زیرا ممکن است ایمیل ما اشتباها به پوشه اسپم رفته باشد.
+</p>
+<br />
+<p class="text-md-center">
+    پس از مشاهده و دسترسی به لینک تأیید ایمیل، لطفا آن را در مرورگر خود باز نمایید(روی لینک کلیک نمایید و یا آن را کپی و در آدرس بار مرورگر خود جای گذاری نمایید) تا ایمیل شما توسط ما تأیید شود و پنل کاربری قابل دسترس شود.
+</p>
+
+@*<div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+
+        </div>
+    </div>*@
+
+<br />
+
+<p class="text-center">
+    @Html.ActionLink("بازگشت به صفحه اصلی", "go_to_index_home", "Account", new { @class = "btn btn-info" })
+</p>

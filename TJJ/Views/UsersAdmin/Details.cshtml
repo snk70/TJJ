@@ -1,0 +1,44 @@
+﻿@model IdentitySample.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "جزئیات کاربر";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<div>
+    <h4>جزئیات کاربر</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+    </dl>
+</div>
+<h4>لیست نقش های این کاربر</h4>
+@if (ViewBag.RoleNames.Count == 0)
+{
+    <hr />
+    <p>هیچ نقشی برای اینکاربر یافت نشد</p>
+}
+
+<table class="table">
+
+    @foreach (var item in ViewBag.RoleNames)
+    {
+        <tr>
+            <td>
+                @item
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("ویرایش کاربر", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("بازگشت به لیست کاربران", "Index")
+</p>
+
+
+

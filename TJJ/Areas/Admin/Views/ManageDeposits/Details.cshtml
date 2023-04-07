@@ -1,0 +1,113 @@
+﻿@model TJJ.Areas.DataViewModel.ManageDepositsViewModel
+
+@{
+    ViewBag.Title = "واریز و درخواست افزایش شارژ طلای خام";
+    //Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+
+<div>
+    @*<h4>جزئیات این پرداخت</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserFullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserFullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_status)
+        </dt>
+
+        <dd>
+            @Data_Layer.Tjj_Convertors.Get_Deposit_Status(Model.deposit_status)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_money_value)
+        </dt>
+
+        <dd>
+            @Data_Layer.Tjj_Convertors.GetClearNumber(Model.deposit_money_value.ToString())
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_date_time)
+        </dt>
+
+        <dd>
+            @Data_Layer.Tjj_Convertors.Get_Date_and_Time(Model.deposit_date_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_tracking_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_tracking_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_dest_account_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_dest_account_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_comment)
+        </dd>
+    </dl>
+
+    <br /><br /><br />
+
+    @if (Model.deposit_img != "" && Model.deposit_img != null && Model.deposit_img.ToLower() != "null")
+    {
+        <p>
+            @Html.DisplayNameFor(model => model.deposit_img)
+        </p>
+
+        if (Model.deposit_img == "lg")
+        {
+            <p style="color:red;">
+                عدم آپلود بدلیل سایز بالای فایل
+            </p>
+        }
+        else
+        {
+            string IMGFileURL = (Data_Layer.TJJ_Config_Data.Get_Full_Path_Deposit_File(Model.deposit_img).Replace("~", ""));
+
+            <a href="@(IMGFileURL)" title="تصویر واریز" target="_blank">
+                <p>
+                    <img src="@(Data_Layer.TJJ_Config_Data.Get_Full_Path_Deposit_File(Model.deposit_img).Replace("~",""))" alt="خطا-لطفا با مدیریت سایت تماس حاصل فرمایی" style="max-width:200px;" />
+                </p>
+            </a>
+
+        }
+
+    }
+
+    <button class="btn btn-outline-info" onclick="details_us('@(Model.Id)')">جزئیات کاربر</button>
+
+</div>
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.deposit_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

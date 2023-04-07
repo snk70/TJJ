@@ -1,0 +1,67 @@
+﻿@model TJJ.Areas.Admin.Models.tbl_Tickets
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_Tickets</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_answer_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_answer_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_date_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_date_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.read_ticket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.read_ticket)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.fname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ticket_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

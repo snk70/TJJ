@@ -1,0 +1,59 @@
+﻿@{
+    const string keep_link_text = "&%!@=+&%%$#";
+    string domain_address = Request.Url.AbsoluteUri.Replace("://", keep_link_text).Replace(Request.Url.PathAndQuery, "").Replace(keep_link_text, "://");
+}
+
+@{
+    ViewBag.Title = "TJJ سامانه خرید و فروش آنلاین طلای خام";
+}
+
+@section intro_div_class
+{
+    <section class="intro">
+        <div class="container">
+            <div class="row">
+                <div class="wall_intro">
+                    <h1 class="wal_inf_pl_yell" style="margin-top: 75px">
+                        TJJ بازار آنلاین معاملاتی طلا خام
+                    </h1>
+                    <div class="wal_inf_pl_whi rtl">
+                        <p class="center rtl">
+                            با TJJ، خرید و فروش آنلاین طلا در محیطی امن و حرفه ای تجربه کنید.
+                        </p>
+                    </div>
+                    <div class="img_for_panel">
+                        <div class="col-xs-12 col-sm-12 col-md-9 pnl_wal_im2">
+                            <img src="~/Content/assets/tjj_intro.png" alt="خرید بیت کوین" class="img-fluid">
+                        </div>
+                        <div class="col-sm-12 btn_for_start">
+                            <a data-turbolinks="false" href="@(domain_address)/Account/Register" class="btn btn-danger btn_start_now">همین الان شروع کنید</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+<h2 style="text-align: center;">
+    <span style="font-size: 130%;font-family:IRANSansWeb;">
+        <strong>
+            <span style="color: #ced113;">
+                بازار آنلاین خرید و فروش طلای خام (TJJ)
+            </span>
+        </strong>
+    </span>
+</h2>
+<h3 style="text-align: center;">
+    <span style="color: #fbff00;line-height:180%;">
+        با سامانه آنلاین طلا یا به اختصار(TJJ) میتوانید آسوده خاطر به خرید و فروش آنلاین طلای خام بپردازید.
+    </span>
+</h3>
+<h3 style="text-align: center;"><span style="font-size: 150%; color: #12deda;line-height:120%;">همین الان دست به کار شده و در سامانه به طور رایگان ثبت نام کنید!!</span></h3>

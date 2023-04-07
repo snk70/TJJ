@@ -1,0 +1,116 @@
+﻿@model IdentitySample.Models.RegisterViewModel
+@{
+    ViewBag.Title = "ثبت نام سرمایه گذار در سامانه معاملات آنلاین طلا";
+    Layout = "~/Views/Shared/_account_layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "login100-form validate-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <span class="login100-form-title p-b-49">
+        ثبت نام در سامانه
+    </span>
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <br />
+
+
+    @*@Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })*@
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.fname, new { @class = "label-input100" })
+        @Html.TextBoxFor(m => m.fname, new { @class = "input100", @placeholder = "نام خود را وارد کنید" })
+    </div>
+
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.lname, new { @class = "label-input100" })
+        @Html.TextBoxFor(m => m.lname, new { @class = "input100", @placeholder = "نام خانوادگی خود را واد کنید" })
+
+    </div>
+
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.code_melli, new { @class = "label-input100" })
+        @Html.TextBoxFor(m => m.code_melli, new { @class = "input100", @placeholder = "کد ملی خود را واد کنید" })
+
+    </div>
+
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.birthday_date, new { @class = "label-input100" })
+        <label class = "label-input100">به عنوان نمونه: 1350/10/05</label>
+        @Html.TextBoxFor(m => m.birthday_date, new { @class = "input100", @placeholder = "تاریخ تولد خود را وارد کنید" })
+
+    </div>
+
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.inviter_code, new { @class = "label-input100" })
+        @Html.TextBoxFor(m => m.inviter_code, new { @class = "input100", @placeholder = "کد معرف را وارد کنید(اختیاری)" })
+
+    </div>
+
+    @*<div class="wrap-input100 m-b-23">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "label-input100" })
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "input100", @placeholder = "شماره موبایل خود را وارد کنید" })
+
+        </div>*@
+
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.UserName, new { @class = "label-input100" })
+        @Html.TextBoxFor(m => m.UserName, new { @class = "input100", @placeholder = "در صورت خالی گذاشتن، از ایمیل شما استفاده میشود" })
+
+    </div>
+
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.Email, new { @class = "label-input100" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "input100", @placeholder = "آدرس ایمیل خود را وارد کنید" })
+
+    </div>
+
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.Password, new { @class = "label-input100" })
+        <label class = "label-input100">حداقل 6 کاراکتر و شامل حرف بزرگ و کوچک لاتین و کاراکتر خاص</label>
+        @Html.PasswordFor(m => m.Password, new { @class = "input100", @placeholder = "رمز عبور خود را وارد  کنید" })
+
+    </div>
+
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "label-input100" })
+        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input100", @placeholder = "تکرار رمز عبور" })
+    </div>
+
+    <div class="wrap-input100 m-b-23">
+        @Html.CheckBoxFor(m => m.read_terms)
+        @Html.LabelFor(m => m.read_terms)
+        <a href="/Home/Terms" target="_blank">(مشاهده)</a>
+    </div>
+    
+    <div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <input type="submit" value="تأیید و ثبت نام" class="login100-form-btn button" />
+        </div>
+    </div>
+    <br />
+}
+<div class="text-right p-t-8 p-b-31">
+    @Html.ActionLink("از قبل ثبت نام کرده و حساب دارید؟؟ وارد شوید", "Login", "Account")
+</div>
+
+
+@section Scripts {
+
+
+
+
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/respond.min.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
+
+
+}

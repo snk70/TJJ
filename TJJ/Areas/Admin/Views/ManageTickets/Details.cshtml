@@ -1,0 +1,84 @@
+﻿@model TJJ.Areas.Admin.DataViewModel.ManageTicketsViewModel
+
+@{
+    ViewBag.Title = "Details";
+    //Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+
+<div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_answer_id)
+        </dt>
+
+        @if (Model.ticket_answer_id == -1)
+        {
+            <dd>درخواست جدید</dd>
+        }
+        else if (Model.ticket_answer_id == 0)
+        {
+            <dd>ارسال شده از پشتیبانی سایت</dd>
+        }
+        else
+        {
+            IdentitySample.Models.ApplicationDbContext db = new IdentitySample.Models.ApplicationDbContext();
+            var ResponseInfo = db.Tickets_tbl.SingleOrDefault(p => p.ticket_id == Model.ticket_answer_id);
+            db.Dispose();
+
+            string ResponseText = "پاسخ تیکت با شناسه: " + Model.ticket_answer_id + " و موضوع:    " + ResponseInfo.ticket_subject + "      و متن:     " + ResponseInfo.ticket_desc;
+
+            <dd>@(ResponseText)</dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_date_time)
+        </dt>
+
+        <dd>
+            @Data_Layer.Tjj_Convertors.Get_Date_and_Time(Model.ticket_date_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ticket_desc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ticket_desc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.read_ticket)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.read_ticket)
+        </dd>
+
+    </dl>
+    <button class="btn btn-outline-info" onclick="details_us('@(Model.Id)')">جزئیات کاربر</button>
+</div>
+
+
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ticket_id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

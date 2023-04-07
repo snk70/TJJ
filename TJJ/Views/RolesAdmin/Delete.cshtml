@@ -1,0 +1,31 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+
+@{
+    ViewBag.Title = "حذف این نقش";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<h3>آیا مایل به حذف این نقش هستید؟؟</h3>
+<p>با حذف این نقش، این نقش از تمامی کاربران حذف می شود، ولیکن اطلاعات کاربران باقی می ماند.</p>
+<div>
+    <h4>نقش</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("بازگشت به لیست نقش ها", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,97 @@
+﻿@model TJJ.Areas.Admin.Models.tbl_Deposits
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>tbl_Deposits</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.charge_gold_value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.charge_gold_value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_money_value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_money_value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_date_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_date_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_tracking_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_tracking_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_dest_account_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_dest_account_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_img)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_img)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deposit_comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deposit_comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.fname)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

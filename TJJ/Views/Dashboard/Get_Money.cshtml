@@ -1,0 +1,82 @@
+﻿@model TJJ.Data_Base.DataViewModels.GetMoney
+
+@{
+    ViewBag.Title = "دریافت و واریز شارژ ريالی به حساب-استرداد مبلغ شارژ ريالی";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<br /><br />
+
+
+@*<h3 style="line-height:190%;text-align:center;border-color:black;">
+    وضعیت خرید و فروش طلا هم اکنون باز است و شما میتوانید به راحتی درخواست افزایش شارژ طلای خام حساب کاربری خود(خرید طلای خام) و یا کسر شارژ طلای خام حساب کاربری و واریز مبلغ ریالی به حساب بانکی(فروش طلای خام به قیمت روز)، را ثبت نمایید.
+</h3><br />*@
+<h3 style="line-height:190%;text-align:center;border-color:black;">
+    در این قسمت میتوانید درخواست استرداد شارژ ریالی حساب کاربری و واریز آن به حساب بانکی خود را ثبت کنید؛ توجه داشته باشید در صورتی که مشخصات شماره کارت و شبا حساب بانکی با اطلاعات شخصی شما مطابقت نداشته باشد، واریز انجام نخواهد شد.
+</h3>
+<br />
+@*<p style="line-height:190%;text-align:center;border-color:black;font-size:130%;">
+    *همینطور جهت اطلاع از قیمت دقیق میزان طلای خام مورد درخواست، میتوانید مقدار گرم طلای خام را در باکس زیر وارد نمایید تا مبلغ ريالی آن نمایش داده شود.
+</p>*@
+
+@using (Html.BeginForm("Get_Money", "Dashboard", FormMethod.Post, new { @class = "login100-form validate-form", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <br />
+
+        <div class="wrap-input100 m-b-23">
+            @Html.LabelFor(m => m.MoneyValue, new { @class = "label-input100" })
+            <br />
+            @Html.TextBoxFor(m => m.MoneyValue, new { @class = "input101" })
+        </div>
+        <br /><br />
+
+        <div class="wrap-input100 m-b-23">
+            @Html.LabelFor(m => m.Comments, new { @class = "label-input100" })
+            <br />
+            <textarea id="Comments" name="Comments" class="input101" style="min-height:150px;"></textarea>
+        </div>
+        <br /><br />
+
+        <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+                <div class="login100-form-bgbtn"></div>
+                <input type="submit" value="ثبت درخواست" class="btn btn-success btn--icon-text" />
+            </div>
+        </div>
+        <br />
+}
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#sell_gold_value").keyup(function () {
+                //alert('Hello');
+                var goldval = document.getElementById("sell_gold_value").value;
+
+                if (goldval == "") {
+                    $('#Gold_Price_Label').html("");
+                } else if ($.isNumeric(goldval)) {
+
+                    $.post("/Dashboard/Get_Gold_Price_Value/", { GoldValue: goldval }, function (prc) {
+                        //alert(prc);
+                        $('#Gold_Price_Label').html("مبلغ واریز: " + prc + " ريال");
+
+                    });
+                }
+
+            });
+        });
+
+
+    </script>
+}
+
+@section get_money
+{
+    navigation__active
+}

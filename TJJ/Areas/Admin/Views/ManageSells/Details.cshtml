@@ -1,0 +1,77 @@
+﻿@model TJJ.Areas.DataViewModel.ManageSellsViewModel
+
+@{
+    ViewBag.Title = "جزئیات درخواست فروش";
+    //Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+
+<div>
+    @*<h4>ManageSellsViewModel</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_status)
+        </dt>
+
+        <dd>
+            @Data_Layer.Tjj_Convertors.Get_Deposit_Status(Model.req_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_money_value)
+        </dt>
+
+        <dd>
+            @Data_Layer.Tjj_Convertors.GetClearNumber(Model.req_money_value.ToString())
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_date_time)
+        </dt>
+
+        <dd>
+            @Data_Layer.Tjj_Convertors.Get_Date_and_Time(Model.sell_date_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_dest_account_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sell_dest_account_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_user_comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sell_user_comment)
+        </dd>
+
+    </dl>
+    <button class="btn btn-outline-info" onclick="details_us('@(Model.Id)')">جزئیات کاربر</button>
+</div>
+
+
+@*<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.req_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>*@

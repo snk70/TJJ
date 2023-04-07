@@ -1,0 +1,107 @@
+﻿@model TJJ.Data_Base.DataViewModels.DepositIncreaseRial
+
+@{
+    ViewBag.Title = "افزایش شارژ ریالی حساب کاربری";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<br /><br />
+
+@*<p class="center_txt" style="font-size:150%;font-weight:700;">
+        قیمت فعلی طلای خام: گرمی @Data_Layer.TJJ_Config_Data.GetGoldPriceClear() ريال
+    </p>
+    <br />*@
+
+
+<h3 style="line-height:190%;text-align:center;border-color:black;">
+    جهت ثبت درخواست افزایش سطح شارژ ريالی حساب کاربری، ابتدا مبلغ مورد نظر را به شماره حساب مقصد واریز فرموده، و سپس اطلاعات مزبور را در فرم زیر درج نمایید.
+</h3>
+<br />
+@*<p style="line-height:190%;text-align:center;border-color:black;font-size:130%;">
+    *همینطور جهت اطلاع از قیمت دقیق میزان طلای خام مورد درخواست، میتوانید مقدار گرم طلای خام را در باکس زیر وارد نمایید تا مبلغ ريالی آن نمایش داده شود.
+</p>*@
+
+@using (Html.BeginForm("Deposit", "Dashboard", FormMethod.Post, new { @class = "login100-form validate-form", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <br />
+
+        <div class="wrap-input100 m-b-23">
+            @Html.LabelFor(m => m.charge_rial_value, new { @class = "label-input100" })
+            <br />
+            @Html.TextBoxFor(m => m.charge_rial_value, new { @class = "input101" })
+        </div>
+        <br /><br />
+        <div class="wrap-input100 m-b-23">
+            @Html.LabelFor(m => m.deposit_dest_account_number, new { @class = "label-input100" })
+            <br />
+            @Html.TextBoxFor(m => m.deposit_dest_account_number, new { @class = "input101" })
+        </div>
+        <br /><br />
+        <div class="wrap-input100 m-b-23">
+            @Html.LabelFor(m => m.deposit_tracking_code, new { @class = "label-input100" })
+            <br />
+            @Html.TextBoxFor(m => m.deposit_tracking_code, new { @class = "input101" })
+        </div>
+        <br /><br />
+        <div class="wrap-input100 m-b-23">
+            @Html.LabelFor(m => m.deposit_comment, new { @class = "label-input100" })
+            <br />
+            <textarea id="deposit_comment" name="deposit_comment" class="input101" style="min-height:150px;"></textarea>
+        </div>
+        <br /><br />
+
+        <div class="wrap-input100 m-b-23">
+            <label class="label-input100">آپلود فایل یا تصویر واریز(اختیاری)</label>
+            <br />
+            <label class="label-input100" style="color:red;font-weight:bolder;">نهایت حجم قابل قبول، 1 مگابایت می باشد</label>
+            <br /><br />
+            <input type="file" value="تصویر واریز وجه" name="deposit_img" />
+        </div>
+        <br /><br />
+
+        <div class="container-login100-form-btn">
+            <div class="wrap-login100-form-btn">
+                <div class="login100-form-bgbtn"></div>
+                <input type="submit" value="تأیید و ارسال" class="btn btn-success btn--icon-text" />
+            </div>
+        </div>
+        <br />
+
+
+}
+
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#charge_gold_value").keyup(function () {
+                //alert('Hello');
+                var goldval = document.getElementById("charge_gold_value").value;
+
+                if (goldval == "") {
+                    $('#Gold_Price_Label').html("");
+                } else if ($.isNumeric(goldval)) {
+
+                    $.post("/Dashboard/Get_Gold_Price_Value/", { GoldValue: goldval }, function (prc) {
+                        //alert(prc);
+                        $('#Gold_Price_Label').html("مبلغ واریز: " + prc + " ريال");
+
+                    });
+                }
+
+            });
+        });
+
+
+    </script>
+}
+
+@section charge_rial
+{
+    navigation__active
+}

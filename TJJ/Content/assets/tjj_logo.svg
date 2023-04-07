@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="114px" height="27px" viewBox="0 0 114 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.3 (67297) - http://www.bohemiancoding.com/sketch -->
+    <title>logo-wallex-v2 copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="8.02875989%" y1="41.1312782%" x2="136.768997%" y2="75.0070677%" id="linearGradient-1">
+            <stop stop-color="#1B0000" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#140000" stop-opacity="0.3" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="49.9996992%" x2="68.7401674%" y2="49.9996992%" id="linearGradient-2">
+            <stop stop-color="#140000" stop-opacity="0.3" offset="0%"></stop>
+            <stop stop-color="#1B0000" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="landing-page-pro" transform="translate(-181.000000, -14.000000)">
+            <g id="logo-wallex-v2-copy-2" transform="translate(181.000000, 14.000000)">
+                <polygon id="Path" fill="#0E4CAF" points="65.0986877 0.0602230483 73.0278215 0.0602230483 82.0341207 27 74.543832 27"></polygon>
+                <polygon id="Path" fill="#0E4CAF" points="54.3769029 0.0602230483 62.296063 0.0602230483 71.312336 27 63.8220472 27"></polygon>
+                <polygon id="Path" fill="#0E4CAF" points="60.3910761 27 51.3847769 0.0602230483 51.3847769 0.0602230483 43.455643 0.0602230483 43.455643 0.0602230483 34.4493438 27 41.9296588 27 47.4152231 11.3520446 52.9107612 27"></polygon>
+                <polygon id="Path" fill="#0E4CAF" points="14.3821522 0.0602230483 23.3884514 27 23.3984252 27 31.3175853 27 31.3175853 27 40.3338583 0.0602230483 32.8435696 0.0602230483 27.3580052 15.7081784 21.8724409 0.0602230483"></polygon>
+                <polygon id="Path" fill="#F2B80C" points="74.5538058 27 83.3805774 27 88.6267717 20.3252788 79.8 20.3252788"></polygon>
+                <polygon id="Path" fill="#F2B80C" points="91.3496063 6.74498141 89.0057743 0.0602230483 80.4383202 0.0602230483 82.7821522 6.74498141"></polygon>
+                <polygon id="Path" fill="#F2B80C" points="110.928084 10.1776952 83.9889764 10.167658 85.1559055 13.5100372 82.5328084 16.8423792 109.681365 16.8423792 112.164829 13.6806691"></polygon>
+                <path d="M113.970079,0.0602230483 L105.701837,0.0602230483 L100.934383,6.13271375 L98.9097113,0.0602230483 L90.2824147,0.0602230483 C91.4692913,3.43271375 92.656168,6.80520446 93.8330709,10.167658 L95.0498688,13.6505576 L92.4367454,16.9728625 L84.5674541,26.9899628 L92.9553806,26.9899628 L97.6430446,20.9977695 L99.7475066,26.9899628 L107.935958,26.9899628 L103.427822,13.5301115 L113.970079,0.0602230483 Z" id="Path" fill="#F2B80C"></path>
+                <polygon id="Path" fill="url(#linearGradient-1)" points="93.8230971 10.1776952 95.0299213 13.6505576 92.5265092 16.8423792 87.4698163 16.8423792 88.7065617 10.167658"></polygon>
+                <polygon id="Path" fill="url(#linearGradient-2)" points="106.040945 10.167658 103.407874 13.5301115 104.514961 16.8423792 108.085564 16.8423792 110.559055 13.6806691 109.32231 10.1776952"></polygon>
+                <polygon id="Path" fill="#0E4CAF" points="15.5590551 7.82899628 12.9958005 15.7081784 7.51023622 0.0602230483 0.0199475066 0.0602230483 9.03622047 27 9.03622047 27 16.9553806 27 16.9653543 27 19.4488189 19.2312268"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

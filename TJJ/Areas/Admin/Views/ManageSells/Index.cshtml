@@ -1,0 +1,137 @@
+﻿@model IEnumerable<TJJ.Areas.DataViewModel.ManageSellsViewModel>
+
+@{
+    ViewBag.Title = "درخواست های واریز واسترداد شارژ ریالی ";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<div style="width:100%;height:400px;overflow:scroll;">
+    <div style="width:110%;">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.req_id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.req_status)
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.sell_gold_value)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.req_money_value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sell_date_time)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sell_dest_account_number)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                string tr_style = "";
+
+                if (item.confirm_Account_Bank)
+                {
+                    tr_style = "";
+                }
+                else
+                {
+                    tr_style = "background-color:#b20000;";
+                }
+
+                <tr style="@(tr_style)">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.req_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Data_Layer.Tjj_Convertors.Get_Deposit_Status(item.req_status)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.sell_gold_value)
+                        </td>*@
+                    <td>
+                        @Data_Layer.Tjj_Convertors.GetClearNumber(item.req_money_value.ToString())
+                    </td>
+                    <td>
+                        @Data_Layer.Tjj_Convertors.Get_Date_and_Time(item.sell_date_time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sell_dest_account_number)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("جزئیات", "Details", new { id = item.deposit_id }, new { @class = "btn btn-outline-info" }) |*@
+                        <button class="btn btn-outline-info" id="@(item.req_id)" onclick="details_dep(@item.req_id)">جزئیات</button> |
+                        @Html.ActionLink("تأیید", "pass", new { id = item.req_id }, new { @class = "btn btn-success" })
+                        @Html.ActionLink("ردکردن", "reject", new { id = item.req_id }, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("ریست", "reset", new { id = item.req_id }, new { @class = "btn btn-outline-info" })
+
+                        @*                    @Html.ActionLink("تأیید", "pass", new { id = item.deposit_id }, new { @class = "" })*@
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
+
+@section requests_manager
+{
+    navigation__active
+}
+
+<div class="modal fade" id="my-modal-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius:30px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="my-modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="my-modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Scripts/modal.js"></script>
+    <script>
+
+        function details_dep(id) {
+            $('#my-modal-1').modal();
+            $.get("/Admin/ManageSells/Details/" + id, function (result) {
+                $('#my-modal-title').html('جزئیات واریز');
+                $('#my-modal-body').html(result);
+            });
+        }
+
+        function details_us(id) {
+            $('#my-modal-1').modal();
+            $.get("/Admin/ManageUsers/Details/" + id, function (result) {
+                $('#my-modal-title').html('جزئیات کاربر');
+                $('#my-modal-body').html(result);
+            });
+        }
+
+    </script>
+
+}

@@ -1,0 +1,89 @@
+﻿@model IEnumerable<TJJ.Areas.Admin.Models.tbl_Deposits>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div style="width:100%;height:400px;overflow:scroll;">
+    <div style="width:150%;">
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.deposit_status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.charge_gold_value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.deposit_money_value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.deposit_date_time)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.deposit_tracking_code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.deposit_dest_account_number)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.deposit_img)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.deposit_comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AspNetUser.fname)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deposit_status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.charge_gold_value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deposit_money_value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deposit_date_time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deposit_tracking_code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deposit_dest_account_number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deposit_img)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.deposit_comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.fname)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.deposit_id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.deposit_id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.deposit_id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

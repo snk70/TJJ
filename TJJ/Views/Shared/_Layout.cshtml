@@ -1,0 +1,322 @@
+﻿@{
+    IdentitySample.Models.ApplicationDbContext DB = new IdentitySample.Models.ApplicationDbContext();
+    TJJ.IUsersRepository UsersRepository;
+    UsersRepository = new TJJ.Services.Users_Repository(DB);
+}
+
+@{
+    const string keep_link_text = "&%!@=+&%%$#";
+    string domain_address = Request.Url.AbsoluteUri.Replace("://", keep_link_text).Replace(Request.Url.PathAndQuery, "").Replace(keep_link_text, "://");
+}
+
+@{
+    if (User.Identity.IsAuthenticated && Session["u_name"] == null)
+    {
+        var u_date = UsersRepository.Get_User_BY_UserName(User.Identity.Name);
+        UsersRepository.Disposi_db();
+        Session["u_name"] = u_date.fname + " " + u_date.lname;
+    }
+}
+<!DOCTYPE html>
+<html class="no-js" lang="fa">
+<head>
+    <link rel="stylesheet" href="~/Content/assets/vendorF.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>@(ViewBag.title)</title>
+
+</head>
+<body style="direction:rtl;">
+    <div id="main-content-wrapper">
+        <section id="main_top">
+            <div class="container-fluid wallex_header_bg" id="header_bg">
+                <div id="mobile_device">
+                    <a href="javascript:void(0);" class="menu_mobile_icon pull-right d-block d-sm-block">
+                        <div class="menu_btn"></div>
+                    </a>
+                    <div class="mobile_logo d-block d-sm-block text-center">
+                        <a class="mobile_menu_logo" href="http://Tjj.ir">
+                            <img src="~/Content/assets/logo-wallex-v2.svg" class="img-fluid" alt="خرید و فروش بیت کوین">
+                        </a>
+                    </div>
+                    <ul class="mobile_menu_ul">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li><a href="@(domain_address)/Manage/Index">پنل کاربری</a></li>
+                        }
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <li class="mobile_menu_li">
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="mobile_menu_li_a">خروج از حساب کاربری</a>
+
+                                    @*@Html.ActionLink("خروج از حساب کاربری", "Logoff", "Account", htmlAttributes: new { @class = "mobile_menu_li_a",@href= "javascript:document.getElementById('logoutForm').submit()" })*@
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="mobile_menu_li">
+                                <a href="@(domain_address)/Account/Register" class="mobile_menu_li_a">ثبت نام</a>
+                                @*@Html.ActionLink("ثبت نام", "Register", "Account", htmlAttributes: new { @class = "mobile_menu_li_a" })*@
+                            </li>
+
+                            <li class="mobile_menu_li">
+                                <a href="@(domain_address)/Account/Login" class="mobile_menu_li_a">ورود به حساب کابری</a>
+                                @*@Html.ActionLink("ورود به حساب کاربری", "Login", "Account", htmlAttributes: new { @class = "mobile_menu_li_a" })*@
+                            </li>
+                        }
+
+                        @*<li class="mobile_menu_li"><a class="mobile_menu_li_a" title="راهنمای استفاده" href="http://Tjj.irhow-to-use">راهنمای استفاده</a></li>*@
+
+                        <li><a href="@(domain_address)" title="صفحه اصلی">صفحه اصلی</a></li>
+                        <li><a href="@(domain_address)/Home/Contact" title="blog">تماس باما</a></li>
+                        <li><a href="@(domain_address)/Home/Aboutus" title="درباره ما">درباره ما</a></li>
+                        <li><a href="@(domain_address)/Home/Terms" title="قوانین و مقررات">قوانین و مقررات</a></li>
+                        <li><a href="@(domain_address)/Dashboard/buy_gold_charge" title="خرید و فروش آنلاین طلای خام">معامله آنلاین طلا</a></li>
+                    </ul>
+                </div>
+                <header class="gc_main_menu_wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-6">
+
+                                <div class="login-btn pull-right d-none d-sm-none d-md-block">
+
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <a href="javascript:document.getElementById('logoutForm').submit()" data-turbolinks="false" class="btn_register ml-2">
+                                                <span>
+                                                    خروج از حساب
+                                                </span>
+                                            </a>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <a data-turbolinks="false" href="@(domain_address)/Account/Register" title="ثبت نام" class="btn_register ml-2">
+                                            <span>
+                                                ثبت نام
+                                            </span>
+                                        </a>
+
+                                        <a data-turbolinks="false" href="@(domain_address)/Account/Login" title="ورود">
+                                            <span>
+                                                ورود
+                                            </span>
+                                        </a>
+                                    }
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-6">
+                                <div class="menu-area d-sm-block d-flex justify-content-center">
+                                    <nav class="wd_single_index_menu btc_main_menu">
+                                        <ul class="btc_main_menu_ul d-none d-sm-none d-md-block">
+                                            @if (User.Identity.IsAuthenticated)
+                                            {
+                                                <li><a href="@(domain_address)/Manage/Index">پنل کاربری</a></li>
+                                            }
+
+                                            @*@if (User.IsInRole("KeyMaster") || User.Identity.Name == "sinakordestani@gmail.com")
+                                                {
+
+                                                    <li><a href="@(domain_address)/RolesAdmin/Index">مدیریت نقش ها</a></li>
+                                                    <li><a href = "@(domain_address)/UsersAdmin">مدیریت کابران</a></li>
+
+                                                }*@
+                                            <li><a href="@(domain_address)" title="صفحه اصلی">صفحه اصلی</a></li>
+                                            <li><a href="@(domain_address)/Home/Contact" title="blog">تماس باما</a></li>
+                                            <li><a href="@(domain_address)/Home/Aboutus" title="درباره ما">درباره ما</a></li>
+                                            <li><a href="@(domain_address)/Home/Terms" title="قوانین و مقررات">قوانین و مقررات</a></li>
+                                            <li><a href="@(domain_address)/Dashboard/buy_gold_charge" title="خرید و فروش آنلاین طلای خام">معامله آنلاین طلا</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-6">
+                                <div class="logo pull-left d-none d-sm-none d-md-block">
+                                    <a href="@(domain_address)"> <img src="~/Content/assets/tjj_logo.svg" class="img-fluid" alt="خرید و فروش آنلاین طلای خام"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                @RenderSection("intro_div_class", false)
+            </div>
+        </section>
+
+
+
+
+        <section id="second_part">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <section id="features">
+                        <div class="container">
+                            <div class="row features_container">
+                                <div class="col-md-12 col-lg-12 col-xl-8">
+                                    <div class="row">
+                                        @RenderBody()
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!--      Footer After     -->
+                    <div class="container">
+                        <div class="row footer">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a href="http://Tjj.ir#"><img src="~/Content/assets/logo.png" alt="خرید و فروش بیت کوین" class="footer_logo"></a>
+                                    </div>
+                                </div>
+                            </div> <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="footer_title">نحوه استفاده</p>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <a href="" data-turbolinks="false"> <p class="footer_sub_title"> نحوه ثبت نام </p> </a>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <a href="" data-turbolinks="false"> <p class="footer_sub_title"> نحوه ثبت سفارش </p> </a>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <a href="" data-turbolinks="false"> <p class="footer_sub_title"> شیوه های پرداخت </p> </a>
+                                    </div>
+                                </div>
+                            </div> <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="footer_title"> والکس</p>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <a href="" data-turbolinks="false"> <p class="footer_sub_title"> درباره والکس </p> </a>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <a href="" data-turbolinks="false"> <p class="footer_sub_title"> فرصت های شغلی </p> </a>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <a href="" data-turbolinks="false"> <p class="footer_sub_title"> قوانین و مقررات </p> </a>
+                                    </div>
+                                </div>
+                            </div> <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="footer_title">خدمات مشتریان</p>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <a href="" data-turbolinks="false"> <p class="footer_sub_title"> پاسخ به سوالات متداول </p> </a>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <a href="" data-turbolinks="false"> <p class="footer_sub_title"> شرایط استفاده </p> </a>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <a href="" data-turbolinks="false"> <p class="footer_sub_title"> حریم شخصی </p> </a>
+                                    </div>
+                                </div>
+                            </div> <div class="col-6 col-sm-6 col-md-6 col-lg-2 col-xl-2">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="footer_title">تماس با ما</p>
+                                    </div> <div class="col-12 footer_sub_title_container footer_socials_container">
+                                        <p> <a href="https://www.instagram.com/wallexchange/?hl=en" target="_blank"><img src="~/Content/assets/instagram.png" alt="خرید و فروش بیت کوین"></a> <a href="https://t.me/WallexChange" target="_blank"><img src="~/Content/assets/telegram.png" alt="خرید و فروش بیت کوین"></a> <a href="https://www.linkedin.com/company/wallexexchange/" target="_blank"><img src="~/Content/assets/linkedin.png" alt="خرید و فروش بیت کوین"></a> <a href="https://twitter.com/wallexexchange" target="_blank"><img src="~/Content/assets/twitter.png" alt="خرید و فروش بیت کوین"></a> </p>
+                                    </div> <div class="col-12 footer_sub_title_container footer_info">
+                                        <p class="footer_sub_title"> info@wallex.ir </p>
+                                    </div> <div class="col-12 footer_sub_title_container">
+                                        <p class="footer_sub_title" style="direction:ltr"> ۰۲۱-۹۱۰۰۶۵۵۵ <br> (شنبه تا پنجشنبه ۹ تا ۲۰) </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <hr class="second-hr"> <p class="footer-copy">
+                            کلیه حقوق مادی و معنوی این سایت متعلق به <a href="#" target="_blank" title="TJJ">TJJ</a> می باشد
+                        </p>
+
+                    </div>
+                    <!-- End of Footer -->
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+    <script data-cfasync="false" src="~/Content/assets/vendorF.js"></script>
+
+
+
+    <script data-cfasync="false">
+
+        window.jq = jQuery;
+
+        jQuery(window).scroll(function () {
+            jQuery = window.jq;
+            var $height = jQuery(window).scrollTop();
+            if ($height > 0) {
+                jQuery('.gc_main_menu_wrapper').addClass('scroll_style');
+                jQuery('#mobile_device').addClass('scroll_style');
+            } else {
+                jQuery('.gc_main_menu_wrapper').removeClass('scroll_style');
+                jQuery('#mobile_device').removeClass('scroll_style');
+            }
+
+        });
+
+        var $window = jQuery(window);
+        var $pane = jQuery('.menu-area');
+        var windowsize = $window.width();
+
+
+        jQuery('.menu_mobile_icon').on('click', function () {
+            jQuery('.mobile_menu_ul').slideToggle();
+        });
+
+        var elementCard = "div.coin_pr_card";
+
+        var maxHeight = Math.max.apply(null, jQuery(elementCard).map(function () {
+            return $(this).height();
+        }).get());
+
+        jQuery(elementCard).height(maxHeight);
+
+        persian = { 0: '۰', 1: '۱', 2: '۲', 3: '۳', 4: '۴', 5: '۵', 6: '۶', 7: '۷', 8: '۸', 9: '۹' };
+
+        function traverse(el) {
+            if (el.nodeType == 3) {
+                var list = el.data.match(/[0-9]/g);
+                if (list != null && list.length != 0) {
+                    for (var i = 0; i < list.length; i++)
+                        el.data = el.data.replace(list[i], persian[list[i]]);
+                }
+            }
+            for (var i = 0; i < el.childNodes.length; i++) {
+                traverse(el.childNodes[i]);
+            }
+        }
+
+        traverse(document.getElementById('main-content-wrapper'));
+        $('.apply_job').on('click', function () {
+            Swal.fire({
+                html: $('#apply').html(),
+                showConfirmButton: false,
+            })
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>

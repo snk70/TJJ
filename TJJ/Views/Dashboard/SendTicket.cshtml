@@ -1,0 +1,44 @@
+﻿@model TJJ.Data_Base.DataViewModels.InsertTicketViewModel
+
+@{
+    ViewBag.Title = "ارسال پیام به پشتیبان سایت";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<h2>ارسال تیکت پشتیبانی</h2>
+
+@using (Html.BeginForm("SendTicket", "Dashboard", FormMethod.Post, new { @class = "login100-form validate-form", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <br />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <br />
+
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.ticket_subject, new { @class = "label-input100" })
+        <br />
+        @Html.TextBoxFor(m => m.ticket_subject, new { @class = "input101" })
+    </div>
+    <br /><br />
+    <div class="wrap-input100 m-b-23">
+        @Html.LabelFor(m => m.ticket_desc, new { @class = "label-input100" })
+        <br />
+        @*@Html.TextBoxFor(m => m.ticket_desc, new { @class = "input101",@style="height:500px;" })*@
+        <textarea id="ticket_desc" name="ticket_desc" class="input101" style="min-height:150px;"></textarea>
+    </div>
+    <br /><br />
+    <div class="container-login100-form-btn">
+        <div class="wrap-login100-form-btn">
+            <div class="login100-form-bgbtn"></div>
+            <input type="submit" value="تأیید و ارسال" class="btn btn-success btn--icon-text" />
+        </div>
+    </div>
+    <br />
+
+
+}
+
+@section ticket_active
+{
+    navigation__active
+}

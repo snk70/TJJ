@@ -1,0 +1,99 @@
+﻿@model TJJ.Areas.Admin.Models.tbl_Request_Money
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbl_Request_Money</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.req_status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_gold_value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sell_gold_value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.req_money_value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.req_money_value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_date_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sell_date_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_tracking_code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sell_tracking_code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_dest_account_number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sell_dest_account_number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_img)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sell_img)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_user_comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sell_user_comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sell_admin_comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sell_admin_comment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.fname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.fname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.req_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

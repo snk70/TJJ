@@ -1,0 +1,111 @@
+﻿@model IEnumerable<TJJ.Areas.Admin.DataViewModel.ManageTicketsViewModel>
+
+@{
+    ViewBag.Title = "مدیریت تیکت های پشتیبانی";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<div style="width:100%;height:400px;overflow:scroll;">
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ticket_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ticket_date_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ticket_subject)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.read_ticket)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ticket_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Data_Layer.Tjj_Convertors.Get_Date_and_Time(item.ticket_date_time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ticket_subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.read_ticket)
+                </td>
+                <td>
+                    <button class="btn btn-outline-info" id="@(item.ticket_id)" onclick="details_tic(@item.ticket_id)">جزئیات</button> |
+                    @Html.ActionLink("پاسخ", "SendTicket", new { userid=item.Id,ticketid=item.ticket_id},new { @class= "btn btn-primary" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+
+<div class="modal fade" id="my-modal-1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="border-radius:30px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="my-modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="my-modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/modal.js"></script>
+    <script>
+
+        function details_tic(id) {
+            $('#my-modal-1').modal();
+            $.get("/Admin/ManageTickets/Details/" + id, function (result) {
+                $('#my-modal-title').html('جزئیات درخواست');
+                $('#my-modal-body').html(result);
+            });
+        }
+
+        function details_us(id) {
+            $('#my-modal-1').modal();
+            $.get("/Admin/ManageUsers/Details/" + id, function (result) {
+                $('#my-modal-title').html('جزئیات کاربر');
+                $('#my-modal-body').html(result);
+            });
+        }
+
+    </script>
+
+}
+
+@section tickets_manager
+{
+    navigation__active
+}

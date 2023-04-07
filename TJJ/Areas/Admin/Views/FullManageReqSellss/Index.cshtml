@@ -1,0 +1,94 @@
+﻿@model IEnumerable<TJJ.Areas.Admin.Models.tbl_Request_Money>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_dashboard_layaout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div style="width:100%;height:400px;overflow:scroll;">
+    <div style="width:150%;">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.req_status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sell_gold_value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.req_money_value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sell_date_time)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sell_tracking_code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sell_dest_account_number)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sell_img)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sell_user_comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.sell_admin_comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AspNetUser.fname)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.req_status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sell_gold_value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.req_money_value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sell_date_time)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sell_tracking_code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sell_dest_account_number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sell_img)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sell_user_comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sell_admin_comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AspNetUser.fname)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.req_id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.req_id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.req_id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>
